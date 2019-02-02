@@ -6,6 +6,8 @@ emoji_digits = [":zero:", ":one:", ":two:", ":three:",
 
 mine_emoji = ":bomb:"
 
+mine = -1
+
 def generate_maze(size, num_mines):
     bomb_pos = [(random.randint(0, size), random.randint(0, size))
             for _ in range(num_mines)]
@@ -17,19 +19,35 @@ def generate_maze(size, num_mines):
     for i in range(size):
         for j in range(size):
             if (i, j) in bomb_pos:
-                board[i][j] = -1
+                board[i][j] = mine
 
     # Count the bomb squares adjacent to each square
     for i in range(size):
         for j in range(size):
-            adjacent_bombs = 0
+            # Skip the mines themselves
+            if board[i][j] == mine:
+                continue
 
+            # Check adjacent squares
+            for k in [-1, 1]:
+                for l in [-1, 1]:
+                    try:
+                        if board[i + k][j + l] == mine:
+                            board[i][j] += 1
+                    except IndexError:
+                        continue
+
+    for i in range(size):
+        print(board[i])
+
+def mark_spoiler(string):
+    return "||%s||" % string
 
 
     print(bomb_pos)
     print(board)
 
 
-generate_maze(5, 3)
+generate_maze(5, 6)
 
     
