@@ -92,7 +92,7 @@ def custom_size_and_difficulty(size, difficulty):
 def invalid_number(e):
     return "Size and difficulty must be integers", 400
 
-@app.errorhandler(AttributeError)
+@app.errorhandler(Exception)
 def invalid_number(e):
     return str(e), 400
 
