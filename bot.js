@@ -1,4 +1,3 @@
-src
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
@@ -41,12 +40,13 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 })
                 break;
             case 'mines':
-                /*var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-                var xhttp = new XMLHttpRequest();
-                var msg = xhttp.responseText();
-                xhttp.open("GET", "http://127.0.0.1:5000/minesweeper", true);
-                var msg = xhttp.send();*/
-                var msg = $.get("http://127.0.0.1:5000/minesweeper", "html")
+                var msg = "none"
+                var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", "http://127.0.0.1:5000/minesweeper", false);
+                xmlHttp.send( null );
+                msg = xmlHttp.responseText;
+
                 bot.sendMessage({
                     to: channelID,
                     message: msg
