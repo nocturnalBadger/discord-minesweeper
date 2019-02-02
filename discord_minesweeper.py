@@ -75,19 +75,19 @@ app = Flask(__name__)
 
 @app.route('/minesweeper', methods=['GET'])
 def default_board():
-    return jsonify(board_to_string(generate_maze(5, 3)))
+    return custom_size_and_difficulty(5, 3)
 
 
 @app.route('/minesweeper/<size>', methods=['GET'])
 def custom_size(size):
     size = int(size)
-    return board_to_string(generate_maze(size, 3))
+    return custom_size_and_difficulty(size, 3)
 
 @app.route('/minesweeper/<size>/<difficulty>', methods=['GET'])
 def custom_size_and_difficulty(size, difficulty):
     size = int(size)
     difficulty = int(difficulty)
-    return board_to_string(generate_maze(size, difficulty))
+    return jsonify(board_to_string(generate_maze(size, difficulty)))
 
 @app.errorhandler(ValueError)
 def invalid_number(e):
