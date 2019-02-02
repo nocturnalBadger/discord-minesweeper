@@ -9,18 +9,18 @@ emoji_digits = [":zero:", ":one:", ":two:", ":three:",
 mine_emoji = ":bomb:"
 
 mine = -1
+max_size = 256
 
-def generate_maze(size, num_mines):
-    bomb_pos = [(random.randint(0, size), random.randint(0, size))
-            for _ in range(num_mines)]
-
+def generate_maze(size, difficulty):
     # Initialize 2D array to all 0's
     board = [ [0 for _ in range(size)] for _ in range(size)]
+
+    chance_of_bomb = 1 / (10 - difficulty)
 
     # Set "bomb" squares to -1
     for i in range(size):
         for j in range(size):
-            if (i, j) in bomb_pos:
+            if random.random() < chance_of_bomb:
                 board[i][j] = mine
 
     # Count the bomb squares adjacent to each square
@@ -54,9 +54,9 @@ def board_to_string(board):
     for row in board:
         for square in row:
             if square == mine:
-                string_board += mine_emoji
+                string_board += mark_spoiler(mine_emoji)
             else:
-                string_board += emoji_digits[square]
+                string_board += mark_spoiler(emoji_digits[square])
         string_board += "\n"
 
     return string_board
@@ -75,7 +75,14 @@ def default_board():
 @app.route('/minesweeper/<size>', methods=['GET'])
 def custom_size(size):
     size = int(size)
-    return json.dumps(board_to_string(generate_maze(size, 3)))
+    return board_to_string(generate_maze(size, 3))
+
+@app.route('/minesweeper/<size>/<difficulty>', methods=['GET'])
+def custom_size_and_difficulty(size, difficulty):
+    size = int(size)
+    difficulty = int(difficulty)
+    return board_to_string(generate_maze(size, difficulty))
+
 
 
 if __name__ == '__main__':
