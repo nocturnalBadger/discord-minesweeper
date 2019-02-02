@@ -4,5 +4,8 @@
   "description": "A bot to design minesweeper games on discord using spoiler tags",
   "main": "bot.js",
   "author": "Jeremy, Adam",
-  "dependencies": {}
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "winston": "^3.2.1"
+  }
 }
