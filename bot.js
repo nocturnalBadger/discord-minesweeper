@@ -33,7 +33,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: 'Pong!'
                 });
                 break;
-            // Just add any case commands if you want to..
+            case 'help':
+                bot.sendMessage({
+                    to: channelID,
+                    message: '```Commands:\ninfo: a little information on the bot\nminesweeper: usage minesweeper 10 5: creates a 10x10 field of mines with 5 mines```'
+                })
+                // Just add any case commands if you want to..
         }
     }
 });

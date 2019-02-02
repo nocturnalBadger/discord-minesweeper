@@ -1,6 +1,6 @@
 {
   "name": "Minesweeper",
-  "version": "0.1",
+  "version": "0.1.2",
   "description": "A bot to design minesweeper games on discord using spoiler tags",
   "main": "bot.js",
   "author": "Jeremy, Adam",
