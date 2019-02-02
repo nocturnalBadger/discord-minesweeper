@@ -31,10 +31,17 @@ def generate_maze(size, num_mines):
             # Check adjacent squares
             for k in range(-1, 2):
                 for l in range(-1, 2):
+                    if j == 0 and l == -1:
+                        continue
+                    if i == 0 and k == -1:
+                        continue
                     try:
                         if board[i + k][j + l] == mine:
                             board[i][j] += 1
                     except IndexError:
+                        #index1 = i+k
+                        #index2 = j+l
+                        #print(f"index error thrown on [{index1}] [{index2}]")
                         continue
 
     for i in range(size):
@@ -64,7 +71,7 @@ def mark_spoiler(string):
     print(board)
 
 
-board = generate_maze(3, 1)
+board = generate_maze(6, 3)
 print(board_to_string(board))
 
 
