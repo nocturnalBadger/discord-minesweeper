@@ -16,6 +16,7 @@ bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
+    logger.info(bot);
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
@@ -42,9 +43,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 })
                 break;
             case 'info':
+                var totalGuilds = Object.keys(bot.servers).length;
                 bot.sendMessage({
                     to: channelID,
-                    message: '```This bot was created by Adam and Jeremy. Why?, Why not?```'
+                    message: '```This bot was created by Adam and Jeremy. Why?, Why not?\n\nCurrently serving ' +  totalGuilds + ' servers```'
                 })
                 break;
             case 'mines':
