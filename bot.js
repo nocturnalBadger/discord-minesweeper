@@ -45,7 +45,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", "http://127.0.0.1:5000/minesweeper", false);
                 xmlHttp.send( null );
-                msg = xmlHttp.responseText;
+                msg = JSON.parse(xmlHttp.responseText);
 
                 bot.sendMessage({
                     to: channelID,

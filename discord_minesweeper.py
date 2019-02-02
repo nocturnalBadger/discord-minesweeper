@@ -1,6 +1,7 @@
 import random
 import json
 from flask import Flask
+from flask import jsonify
 
 emoji_digits = [":zero:", ":one:", ":two:", ":three:",
                 ":four:", ":five:", ":six:",
@@ -74,7 +75,7 @@ app = Flask(__name__)
 
 @app.route('/minesweeper', methods=['GET'])
 def default_board():
-    return json.dumps(board_to_string(generate_maze(5, 3)))
+    return jsonify(board_to_string(generate_maze(5, 3)))
 
 
 @app.route('/minesweeper/<size>', methods=['GET'])
