@@ -24,7 +24,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
 
-        args = args.splice(1);
+        //args = args.splice(1);
         switch(cmd) {
             // !ping
             case 'ping':
@@ -40,7 +40,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 })
                 break;
             case 'mines':
-                var msg = "none"
+                var msg = "none";
                 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", "http://127.0.0.1:5000/minesweeper", false);
@@ -51,6 +51,23 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: msg
                 })
+                break;
+
+            case 'minesweeper':
+                var msg = "none";
+                var size = args[1];
+                var difficulty = args[2];
+                var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", "http://127.0.0.1:5000/minesweeper/" + size + "/" + difficulty, false);
+                xmlHttp.send( null );
+                msg = JSON.parse(xmlHttp.responseText);
+
+                bot.sendMessage({
+                    to: channelID,
+                    message: msg
+                })
+                break;
                 // Just add any case commands if you want to..
         }
     }
