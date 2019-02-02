@@ -9,9 +9,14 @@ emoji_digits = [":zero:", ":one:", ":two:", ":three:",
 mine_emoji = ":bomb:"
 
 mine = -1
-max_size = 256
+max_size = 14
 
 def generate_maze(size, difficulty):
+    if difficulty < 1 or difficulty > 9:
+        raise AttributeError("Difficulty must be between 1 and 9")
+    if size < 0 or size > max_size:
+        raise AttributeError("Size must be between 0 and 14")
+
     # Initialize 2D array to all 0's
     board = [ [0 for _ in range(size)] for _ in range(size)]
 
@@ -83,6 +88,13 @@ def custom_size_and_difficulty(size, difficulty):
     difficulty = int(difficulty)
     return board_to_string(generate_maze(size, difficulty))
 
+@app.errorhandler(ValueError)
+def invalid_number(e):
+    return "Size and difficulty must be integers", 400
+
+@app.errorhandler(AttributeError)
+def invalid_number(e):
+    return str(e), 400
 
 
 if __name__ == '__main__':
