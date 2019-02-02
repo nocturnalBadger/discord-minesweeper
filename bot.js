@@ -1,3 +1,4 @@
+src
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
@@ -37,6 +38,18 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 bot.sendMessage({
                     to: channelID,
                     message: '```Commands:\ninfo: a little information on the bot\nminesweeper: usage minesweeper 10 5: creates a 10x10 field of mines with 5 mines```'
+                })
+                break;
+            case 'mines':
+                /*var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+                var xhttp = new XMLHttpRequest();
+                var msg = xhttp.responseText();
+                xhttp.open("GET", "http://127.0.0.1:5000/minesweeper", true);
+                var msg = xhttp.send();*/
+                var msg = $.get("http://127.0.0.1:5000/minesweeper", "html")
+                bot.sendMessage({
+                    to: channelID,
+                    message: msg
                 })
                 // Just add any case commands if you want to..
         }
