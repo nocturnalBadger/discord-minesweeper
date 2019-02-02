@@ -1,4 +1,5 @@
 import random
+from flask import Flask
 
 emoji_digits = [":zero:", ":one:", ":two:", ":three:",
                 ":four:", ":five:", ":six:",
@@ -63,13 +64,13 @@ def board_to_string(board):
 def mark_spoiler(string):
     return "||%s||" % string
 
+app = Flask(__name__)
 
-    print(bomb_pos)
-    print(board)
+@app.route('/minesweeper', methods=['GET'])
+def default_board():
+    return board_to_string(generate_maze(5, 3))
 
-
-board = generate_maze(6, 3)
-print(board_to_string(board))
-
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
