@@ -29,8 +29,8 @@ def generate_maze(size, num_mines):
                 continue
 
             # Check adjacent squares
-            for k in [-1, 1]:
-                for l in [-1, 1]:
+            for k in range(-1, 2):
+                for l in range(-1, 2):
                     try:
                         if board[i + k][j + l] == mine:
                             board[i][j] += 1
@@ -40,6 +40,22 @@ def generate_maze(size, num_mines):
     for i in range(size):
         print(board[i])
 
+    return board
+
+
+def board_to_string(board):
+    string_board = ""
+    for row in board:
+        for square in row:
+            if square == mine:
+                string_board += mine_emoji
+            else:
+                string_board += emoji_digits[square]
+        string_board += "\n"
+
+    return string_board
+
+
 def mark_spoiler(string):
     return "||%s||" % string
 
@@ -48,6 +64,8 @@ def mark_spoiler(string):
     print(board)
 
 
-generate_maze(5, 6)
+board = generate_maze(3, 1)
+print(board_to_string(board))
 
-    
+
+
