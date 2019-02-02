@@ -19,6 +19,13 @@ def generate_maze(size, num_mines):
             if (i, j) in bomb_pos:
                 board[i][j] = -1
 
+    # Count the bomb squares adjacent to each square
+    for i in range(size):
+        for j in range(size):
+            adjacent_bombs = 0
+
+
+
     print(bomb_pos)
     print(board)
 
