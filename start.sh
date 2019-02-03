@@ -28,7 +28,7 @@ echo "Flask server started as PID ${FLASK_PID}"
 
 sleep 3
 
-if ! curl localhost:5000; then
+if ! curl localhost:5000/minesweeper/1; then
     echo "Failed to reach flask server"
     exit 1
 fi
