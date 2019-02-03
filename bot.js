@@ -48,20 +48,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: '```This bot was created by Adam and Jeremy. Why?, Why not?\n\nCurrently serving ' +  totalGuilds + ' servers```'
                 })
                 break;
-            case 'mines':
-                var msg = "none";
-                var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", "http://127.0.0.1:5000/minesweeper", false);
-                xmlHttp.send( null );
-                msg = JSON.parse(xmlHttp.responseText);
-
-                bot.sendMessage({
-                    to: channelID,
-                    message: msg
-                })
-                break;
-
             case 'minesweeper':
                 var msg = "none";
                 var size = args[1];
