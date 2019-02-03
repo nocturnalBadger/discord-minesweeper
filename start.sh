@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source bot_env/bin/activate
+source venv/bin/activate
 
 python discord_minesweeper.py &
 
