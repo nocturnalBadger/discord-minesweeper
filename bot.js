@@ -17,12 +17,14 @@ bot.on('ready', function (evt) {
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
+
+var prefix = '!mines';
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
+    if (message.startsWith('!mines') || message.startsWith('!minesweeper')) {
+        var args = message.split(' ');
+        var cmd = args[1];
 
         //args = args.splice(1);
         switch(cmd) {
@@ -37,8 +39,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 bot.sendMessage({
                     to: channelID,
                     message: '```Commands:\n' +
-                        'info: a little information on the bot\n' +
-                        'minesweeper: usage minesweeper 10 5: creates a 10x10 field of mines with a difficulty of 5```'
+                        '!mines play <size> <difficulty>\n' +
+                        '  Generates a random square minefield of the given size the given difficulty (1-9)\n' +
+                        '!mines info\n' +
+                        '  Print info about the bot\n' +
+                        '!mines help\n' +
+                        '  Print this help message (clearly you\'ve already figured this one out)```'
                 })
                 break;
             case 'info':
@@ -48,10 +54,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: '```This bot was created by Adam and Jeremy. Why?, Why not?\n\nCurrently serving ' +  totalGuilds + ' servers```'
                 })
                 break;
-            case 'minesweeper':
+            case 'play':
                 var msg = "none";
-                var size = args[1];
-                var difficulty = args[2];
+                var size = args[2];
+                var difficulty = args[3];
                 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open("GET", "http://127.0.0.1:5000/minesweeper/" + size + "/" + difficulty, false);
